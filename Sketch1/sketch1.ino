@@ -14,8 +14,10 @@
 extern float readFloat(unsigned int);
 extern void p_log(char[16], int, int);
 
-// Enum pour les boutons
+// Enum et variables pour les boutons
 enum BOUTON { btnUP, btnDOWN, btnLEFT, btnRIGHT, btnSELECT, btnNONE };
+int lcd_key = 0;
+int adc_key_in = 0;
 
 // Prototypes de fonction
 BOUTON read_LCD_buttons();
@@ -23,10 +25,6 @@ BOUTON read_LCD_buttons();
 // Pins qui seront utilisées
 const int HEATER = 15;
 const int TEMP = 2;
-
-// define some values used by the panel and buttons
-int lcd_key = 0;
-int adc_key_in = 0;
 
 // Variables pour les menus
 int indexRecette = 0;
@@ -52,7 +50,7 @@ void setup()
 	p_log("setup()_debut_2", tempereuse->etape(), 0);
 
 	Recette dummy;
-	dummy.set(50, 27, 31.5);
+	dummy.set(45, 26, 29);
 	dummy.saveRecette(0);
 	dummy.set(22, 23, 24);
 	dummy.saveRecette(1);
@@ -112,7 +110,7 @@ void loop() {
 
 	menu.Update();
 	tempereuse->update(temperature);
-
+	Serial.println(temperature);
 	if (!tempereuse->estEnMarche())
 	{
 		p_log("loop()_recette_démarrée", bouton, 0);
@@ -133,6 +131,8 @@ void loop() {
 
 	cible = tempereuse->setPoint();
 	chauffage = tempereuse->chauffage();
+
+	delay(200);
 }
 
 BOUTON read_LCD_buttons() // read the buttons

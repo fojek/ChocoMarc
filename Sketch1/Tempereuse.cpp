@@ -81,7 +81,7 @@ void Tempereuse::init()
 {
 	p_log("Tempereuse::init()_debut", etapeEnCours, 0);
 	// Instance du PID (&input, &output, &setpoint, P, I, D, mode)
-	pid = new PID(&temperature, &sortie, &setpoint, 50, 0.5, 1, DIRECT);
+	pid = new PID(&temperature, &sortie, &setpoint, 40, 0.5, 1, DIRECT);
 	pid->SetOutputLimits(0, windowSize);
 	
 	// Pin de sortie
@@ -97,15 +97,17 @@ void Tempereuse::init()
 	dernierUpdate = 0;
 
 	// Adresse fixe du capteur de température. Pour contourner une erreur de compilation de la fct search de onewire.
+	// À adapter au capteur! il faut lire l'adresse avec l'exemple de OneWire.
 	addr[0] = 0x28;
 	addr[1] = 0xFF;
-	addr[2] = 0xEA;
-	addr[3] = 0x0D;
-	addr[4] = 0x59;
+	addr[2] = 0x9C;
+	addr[3] = 0xCB;
+	addr[4] = 0x60;
 	addr[5] = 0x16;
-	addr[6] = 0x04;
-	addr[7] = 0x60;
+	addr[6] = 0x03;
+	addr[7] = 0x72;
 
+	//28 FF 9C CB 60 16 3 72
 	p_log("Tempereuse::init()_fin", etapeEnCours, 0);
 }
 
