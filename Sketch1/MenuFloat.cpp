@@ -3,13 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ArduinoSTL.h>
+#include "util.h"
 
 /******************************************
 * Classe dérivée MENU_FLOAT
 * Une ligne de texte et un float
 ******************************************/
 
-MENU_FLOAT::MENU_FLOAT(char ligne1[16], ACTION *a1, ACTION *a2, ACTION* a3, ACTION *a4, float & v) : val(v)
+MenuFloat::MenuFloat(char ligne1[16], Action *a1, Action *a2, Action* a3, Action *a4, float & v) : val(v)
 {
 	strcpy(l1, ligne1);
 
@@ -21,14 +22,12 @@ MENU_FLOAT::MENU_FLOAT(char ligne1[16], ACTION *a1, ACTION *a2, ACTION* a3, ACTI
 	updateL2();
 }
 
-void MENU_FLOAT::updateL2(void)
+void MenuFloat::updateL2(void)
 {
-	char temp[16];
-	ftoa(temp, val, 1);
-	strcpy(l2, temp);
+	formatVal(l2, val);
 }
 
-bool MENU_FLOAT::aChange()
+bool MenuFloat::aChange()
 {
 
 	if (deviationVal(val, val_old))
@@ -37,17 +36,6 @@ bool MENU_FLOAT::aChange()
 		updateL2();
 		return true;
 	}
-
-	return false;
-}
-
-bool MENU_FLOAT::deviationVal(float act, float old)
-{
-	// Deviation de 1% permise avant un refresh
-	const float DEVIATION = 0.0001;
-
-	if (act > old * (1 + (DEVIATION)) || act < old * (1 - (DEVIATION)))
-		return true;
 
 	return false;
 }

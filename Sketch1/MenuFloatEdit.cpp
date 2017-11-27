@@ -3,13 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ArduinoSTL.h>
+#include "util.h"
 
 /******************************************
 * Classe dérivée MENU_FLOAT
 * Une ligne de texte et un float éditable
 ******************************************/
 
-MENU_FLOAT_EDIT::MENU_FLOAT_EDIT(char ligne1[16], char ligne2[16], ACTION *a1, ACTION *a2, ACTION* a3, ACTION *a4, float & v) : val(v)
+MenuFloatEdit::MenuFloatEdit(char ligne1[16], char ligne2[16], Action *a1, Action *a2, Action* a3, Action *a4, float & v) : val(v)
 {
 	strcpy(l1, ligne1);
 	strcpy(l2, ligne2);
@@ -24,9 +25,7 @@ MENU_FLOAT_EDIT::MENU_FLOAT_EDIT(char ligne1[16], char ligne2[16], ACTION *a1, A
 	updateL2();
 }
 
-void MENU_FLOAT_EDIT::updateL2(void)
+void MenuFloatEdit::updateL2(void)
 {
-	char temp[16];
-	Menu::ftoa(temp, tempVal, 4);
-	strcpy(l2, temp);
+	formatVal(l2, tempVal);
 }

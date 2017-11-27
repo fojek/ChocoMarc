@@ -9,7 +9,7 @@
 * Une ligne de texte et un int éditable
 ******************************************/
 
-MENU_INT_EDIT::MENU_INT_EDIT(char ligne1[16], char ligne2[16], ACTION * a1, ACTION * a2, ACTION * a3, ACTION * a4, int & v) : val(v)
+MenuIntEdit::MenuIntEdit(char ligne1[16], char ligne2[16], Action * a1, Action * a2, Action * a3, Action * a4, int & v) : val(v)
 {
 	strcpy(l1, ligne1);
 	strcpy(l2, ligne2);
@@ -24,7 +24,7 @@ MENU_INT_EDIT::MENU_INT_EDIT(char ligne1[16], char ligne2[16], ACTION * a1, ACTI
 	updateL2();
 }
 
-void MENU_INT_EDIT::updateL2(void)
+void MenuIntEdit::updateL2(void)
 {
 	char temp[16];
 	sprintf(temp, "%d", tempVal);

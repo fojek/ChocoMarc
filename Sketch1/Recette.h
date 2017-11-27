@@ -15,6 +15,8 @@ public:
 	Recette();
 	float setpoint(int);
 	void set(float, float, float);
+	void set(unsigned int i, float val);
+	float get(unsigned int i);
 	bool loadRecette(int);
 	bool saveRecette(int);
 };

@@ -20,13 +20,15 @@ C:\Users\mfortier\AppData\Local\Temp\VMBuilds\sketch1\uno\Debug\baseMenu.cpp.o: 
  C:\Users\mfortier\Documents\Arduino\libraries\ArduinoSTL\src/functional \
  C:\Users\mfortier\Documents\Arduino\libraries\ArduinoSTL\src/type_traits \
  C:\Users\mfortier\Documents\Arduino\libraries\ArduinoSTL\src/initializer_list \
- C:\Program\ Files\ (x86)\Arduino\libraries\LiquidCrystal\src/LiquidCrystal.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Print.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WString.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
+ C:\Arduino\libraries\LiquidCrystal\src/LiquidCrystal.h \
+ C:\Arduino\hardware\arduino\avr\cores\arduino/Print.h \
+ C:\Arduino\hardware\arduino\avr\cores\arduino/WString.h \
+ C:\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  C:\Users\mfortier\AppData\Local\Temp\VMBuilds\sketch1\uno\Debug\Menu.h \
  C:\Users\mfortier\AppData\Local\Temp\VMBuilds\sketch1\uno\Debug\Action.h \
  C:\Users\mfortier\AppData\Local\Temp\VMBuilds\sketch1\uno\Debug\MenuIntEdit.h \
  C:\Users\mfortier\AppData\Local\Temp\VMBuilds\sketch1\uno\Debug\MenuFloatEdit.h \
+ C:\Users\mfortier\AppData\Local\Temp\VMBuilds\sketch1\uno\Debug\Menu3FloatEdit.h \
+ C:\Users\mfortier\AppData\Local\Temp\VMBuilds\sketch1\uno\Debug\Recette.h \
  C:\Users\mfortier\AppData\Local\Temp\VMBuilds\sketch1\uno\Debug\Menu3Float.h \
  C:\Users\mfortier\AppData\Local\Temp\VMBuilds\sketch1\uno\Debug\MenuFloat.h

@@ -9,7 +9,7 @@
 * Une ligne de texte et un float éditable
 ******************************************/
 
-class MENU_FLOAT : public Menu
+class MenuFloat : public Menu
 {
 	// Constantes
 	const float FLOAT_INC = 0.5;
@@ -20,14 +20,13 @@ class MENU_FLOAT : public Menu
 
 public:
 	// Méthodes
-	MENU_FLOAT(char[16], ACTION*, ACTION*, ACTION*, ACTION*, float&);
+	MenuFloat(char[16], Action*, Action*, Action*, Action*, float&);
 	void incremente() {}
 	void decremente() {}
 	void confirme(void) {}
 	void ferme(void) {}
 	void updateL2(void);
 	bool aChange();
-	bool deviationVal(float act, float old);
 };
 #endif
 

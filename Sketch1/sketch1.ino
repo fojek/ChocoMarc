@@ -4,6 +4,7 @@
  Author:	mfortier
 */
 
+#include "util.h"
 #include "Recette.h"
 #include "Action.h"
 #include <EEPROM.h>
@@ -31,6 +32,7 @@ const int TEMP = 2;
 // Variables pour les menus
 int indexRecette = 0;
 int indexRecette_old = indexRecette;
+int recetteEnEdition = 0;
 float temperature, cible, chauffage;
 
 // Instance du menu
@@ -40,13 +42,13 @@ BaseMenu menu;
 Tempereuse * tempereuse = new Tempereuse(HEATER, TEMP);
 
 // the setup function runs once when you press reset or power the board
-void setup() 
+void setup()
 {
 	// Démarrage de la communication série
 	Serial.begin(9600);
 
 	p_log("setup()_debut_", tempereuse->etape(), 0);
-	
+
 	tempereuse->init();
 
 	p_log("setup()_debut_2", tempereuse->etape(), 0);
@@ -69,33 +71,47 @@ void setup()
 
 	// Définition des menus
 	menu.addMenu("ChocoMarc v1.0", " < Continuer > ",
-				ACTION::createGoto(1),
-				ACTION::createGoto(1),
-				ACTION::createGoto(1),
-				ACTION::createGoto(1));
+		Action::createNull(),
+		Action::createNull(),
+		Action::createGoto(1),
+		Action::createGoto(1));
 
 	menu.addMenu("Temp. actuelle",
-				ACTION::createGoto(2),
-				ACTION::createGoto(2),
-				ACTION::createGoto(2),
-				ACTION::createGoto(2),
-				temperature);
+		Action::createNull(),
+		Action::createNull(),
+		Action::createGoto(2),
+		Action::createGoto(2),
+		temperature);
 
-	menu.addMenu("Choix recette", "",
-				ACTION::createInc(),
-				ACTION::createDec(),
-				ACTION::createConfirme(3),
-				ACTION::createConfirme(3),
-				indexRecette);
+	menu.addMenu("Choix recette   ", "",
+		Action::createInc(),
+		Action::createDec(),
+		Action::createConfirme(),
+		Action::createGoto(3),
+		indexRecette);
+
+	menu.addMenu("Edition recette #", "",
+		Action::createInc(),
+		Action::createDec(),
+		Action::createConfirme(),
+		Action::createGoto(4),
+		recetteEnEdition);
+
+	menu.addMenu(" T1 |  T2 | T3  ",
+		Action::createInc(),
+		Action::createDec(),
+		Action::createConfirme(),
+		Action::createGoto(1),
+		indexRecette);
 
 	menu.addMenu("Temp|Cible|Chauf", "",
-				ACTION::createGoto(0),
-				ACTION::createGoto(0),
-				ACTION::createGoto(0),
-				ACTION::createGoto(0),
-				temperature,
-				cible,
-				chauffage);
+		Action::createNull(),
+		Action::createNull(),
+		Action::createGoto(0),
+		Action::createGoto(0),
+		temperature,
+		cible,
+		chauffage);
 
 	menu.AfficheMenu();
 	p_log("setup()_fin_", tempereuse->etape(), 0);
@@ -144,7 +160,7 @@ void loop() {
 }
 
 BOUTON read_LCD_buttons() // read the buttons
-{               
+{
 	adc_key_in = analogRead(0);       // read the value from the sensor 
 
 	if (adc_key_in > 1000) return BOUTON::btnNONE;

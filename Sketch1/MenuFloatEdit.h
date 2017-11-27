@@ -8,7 +8,7 @@
 * Classe dérivée MENU_FLOAT
 * Une ligne de texte et un float éditable
 ******************************************/
-class MENU_FLOAT_EDIT : public Menu
+class MenuFloatEdit : public Menu
 {
 	// Constantes
 	const float FLOAT_INC = 0.5;
@@ -19,7 +19,7 @@ class MENU_FLOAT_EDIT : public Menu
 
 public:
 	// Méthodes
-	MENU_FLOAT_EDIT(char[16], char[16], ACTION*, ACTION*, ACTION*, ACTION*, float&);
+	MenuFloatEdit(char[16], char[16], Action*, Action*, Action*, Action*, float&);
 	void incremente() { tempVal += FLOAT_INC; updateL2(); }
 	void decremente() { tempVal -= FLOAT_INC; updateL2(); }
 	void confirme(void) { val = tempVal; updateL2(); }

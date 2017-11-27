@@ -1,28 +1,33 @@
 #include "Action.h"
 
-ACTION::ACTION(TYPE pType) : m_type(pType)
+Action::Action(Type pType) : m_type(pType)
 {
 	m_dest = 0;
 }
 
-ACTION::ACTION(TYPE pType, int pDest) : m_type(pType), m_dest(pDest) 
+Action::Action(Type pType, int pDest) : m_type(pType), m_dest(pDest) 
 {}
 
-ACTION * ACTION::createGoto(int pDest)
+Action * Action::createGoto(int pDest)
 {
-	return new ACTION(TYPE::GoTo, pDest);
+	return new Action(Type::GoTo, pDest);
 }
 
-ACTION * ACTION::createConfirme(int pDest)
+Action * Action::createConfirme()
 {
-	return new ACTION(TYPE::CONFIRME, pDest);
+	return new Action(Type::CONFIRME);
 }
 
-ACTION * ACTION::createInc()
+Action * Action::createInc()
 {
-	return new ACTION(TYPE::INCREMENTE);
+	return new Action(Type::INCREMENTE);
 }
-ACTION * ACTION::createDec()
+Action * Action::createDec()
 {
-	return new ACTION(TYPE::DECREMENTE);
+	return new Action(Type::DECREMENTE);
+}
+
+Action * Action::createNull(void)
+{
+	return new Action(Type::VIDE);
 }

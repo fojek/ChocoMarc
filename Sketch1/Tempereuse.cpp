@@ -1,9 +1,6 @@
-
 #include <OneWire.h>
 #include "Tempereuse.h"
-
-// Prototypes
-void p_log(char[16], int, int);
+#include "util.h"
 
 Tempereuse::Tempereuse(int hPin, int tPin) : heaterPin(hPin), tempPin(tPin), etapeEnCours(0)
 {
@@ -187,14 +184,4 @@ double Tempereuse::getTemp()
 
 	//// default is 12 bit resolution, 750 ms conversion time
 	return (double)raw / 16.0;
-}
-
-void p_log(char a[16], int b, int c)
-{
-	Serial.print("Fonction ");
-	Serial.print(a);
-	Serial.print(", : ");
-	Serial.print(b);
-	Serial.print(", : ");
-	Serial.println(c);
 }

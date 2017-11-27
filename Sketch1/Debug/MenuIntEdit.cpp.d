@@ -35,7 +35,7 @@ C:\Users\mfortier\AppData\Local\Temp\VMBuilds\sketch1\uno\Debug\MenuIntEdit.cpp.
  C:\Users\mfortier\Documents\Arduino\libraries\ArduinoSTL\src/ostream_helpers \
  C:\Users\mfortier\Documents\Arduino\libraries\ArduinoSTL\src/iostream \
  C:\Users\mfortier\Documents\Arduino\libraries\ArduinoSTL\src/string_iostream \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Stream.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Print.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WString.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h
+ C:\Arduino\hardware\arduino\avr\cores\arduino/Stream.h \
+ C:\Arduino\hardware\arduino\avr\cores\arduino/Print.h \
+ C:\Arduino\hardware\arduino\avr\cores\arduino/WString.h \
+ C:\Arduino\hardware\arduino\avr\cores\arduino/Printable.h

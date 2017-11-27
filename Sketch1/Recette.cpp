@@ -1,11 +1,6 @@
 #include "Recette.h"
+#include "util.h"
 #include <EEPROM.h>
-#include <OneWire.h>
-
-// Prototypes de fonctions
-float readFloat(unsigned int);
-void writeFloat(unsigned int, float);
-void p_log(char[16], int, int);
 
 Recette::Recette()
 {}
@@ -22,6 +17,18 @@ void Recette::set(float s1, float s2, float s3)
 	tempCible[0] = s1;
 	tempCible[1] = s2;
 	tempCible[2] = s3;
+}
+
+void Recette::set(unsigned int i, float val)
+{
+	if (i < NUM_TEMP)
+		tempCible[i] = val;
+}
+
+float Recette::get(unsigned int i)
+{
+	if (i < NUM_TEMP)
+		return tempCible[i];
 }
 
 bool Recette::loadRecette(int index)
@@ -48,7 +55,7 @@ bool Recette::loadRecette(int index)
 
 bool Recette::saveRecette(int index)
 {
-	
+
 	// Index de boucle
 	uint8_t i;
 
@@ -71,39 +78,4 @@ bool Recette::saveRecette(int index)
 	p_log("Recette::saveRecette()", index, tempCible[0]);
 
 	return true;
-}
-
-// De Arduino Playground
-float readFloat(unsigned int addr)
-{
-	union
-	{
-		byte b[4];
-		float f;
-	} data;
-	for (int i = 0; i < 4; i++)
-	{
-		data.b[i] = EEPROM.read(addr + i);
-	}
-
-	//p_log("readFloat()", data.f, 0);
-
-	return data.f;
-}
-
-// De Arduino Playground
-void writeFloat(unsigned int addr, float x)
-{
-	union
-	{
-		byte b[4];
-		float f;
-	} data;
-	data.f = x;
-	for (int i = 0; i < 4; i++)
-	{
-		EEPROM.write(addr + i, data.b[i]);
-	}
-	//p_log("writeFloat()", 0, 0);
-
 }

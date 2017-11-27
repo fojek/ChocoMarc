@@ -10,7 +10,7 @@
 * Une ligne de texte et 3 float non éditables
 ******************************************/
 
-class MENU_3FLOAT : public Menu
+class Menu3Float : public Menu
 {
 	// Constantes
 	const int REFRESH_RATE = 500;		// Affichage mis à jour aux 1/2 secondes
@@ -25,7 +25,7 @@ class MENU_3FLOAT : public Menu
 
 public:
 	// Méthodes
-	MENU_3FLOAT(char[16], char[16], ACTION*, ACTION*, ACTION*, ACTION*, float&, float&, float&);
+	Menu3Float(char[16], char[16], Action*, Action*, Action*, Action*, float&, float&, float&);
 
 	// Fonctions inutilisées
 	void incremente() {}
@@ -35,7 +35,6 @@ public:
 	char * retourneL2(void) { updateL2();  return l2; }
 	void updateL2(void);
 	bool aChange();
-	bool deviationVal(float act, float old);
 };
 
 #endif

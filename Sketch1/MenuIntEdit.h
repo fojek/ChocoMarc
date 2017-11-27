@@ -6,7 +6,7 @@
 * Classe dérivée MENU_INT
 * Une ligne de texte et un int éditable
 ******************************************/
-class MENU_INT_EDIT : public Menu
+class MenuIntEdit : public Menu
 {
 	// Valeurs
 	int &val;		// Référence à la variable contenue dans le menu
@@ -14,7 +14,7 @@ class MENU_INT_EDIT : public Menu
 
 public:
 	// Méthodes
-	MENU_INT_EDIT(char[16], char[16], ACTION*, ACTION*, ACTION*, ACTION*, int&);
+	MenuIntEdit(char[16], char[16], Action*, Action*, Action*, Action*, int&);
 	void incremente() { ++tempVal; updateL2(); }
 	void decremente() { --tempVal; updateL2(); }
 	void confirme(void) { val = tempVal; updateL2(); }
