@@ -2,25 +2,11 @@
 #define TEMPEREUSE
 
 #include <PID_v1.h>
-#include <EEPROM.h>
+#include "Recette.h"
 
 // Constantes
-// Un cycle de tempérage contient 3 températures
-const int NUM_TEMP = 3;
 // Intervalle de calcul
 const int INTERVALLE = 200;
-
-class Recette 
-{
-	// Tableau des températures
-	int tempCible[NUM_TEMP];
-public:
-	Recette();
-	float setpoint(int);
-	void set(float, float, float);
-	bool loadRecette(int);
-	bool saveRecette(int);
-};
 
 class Tempereuse
 {

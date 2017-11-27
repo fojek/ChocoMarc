@@ -7,13 +7,13 @@
 
 using namespace std;
 
-class baseMenu
+class BaseMenu
 {
 	const int LARGEUR = 16;
 	const int HAUTEUR = 2;
 
 	// Vecteur d'addresses de la classe de base MENU
-	vector<MENU*> menu;
+	vector<Menu*> menu;
 	int menuEnCours = 0;
 
 	// Instance de l'affichage (Syntaxe bizz à cause d'une erreur de compilation)
@@ -21,13 +21,14 @@ class baseMenu
 	LiquidCrystal lcd = LiquidCrystal(8, 9, 4, 5, 6, 7);
 
 public:
-	baseMenu();
-	~baseMenu();
+	BaseMenu();
+	~BaseMenu();
 
-	int addMenu(char[16], char[16], ACTION, ACTION, ACTION, ACTION);
-	int addMenu(char[16], char[16], ACTION, ACTION, ACTION, ACTION, int&);
-	int addMenu(char[16], char[16], ACTION, ACTION, ACTION, ACTION, float&);
-	int addMenu(char[16], char[16], ACTION, ACTION, ACTION, ACTION, float&, float&, float&);
+	int addMenu(char[16], char[16], ACTION*, ACTION*, ACTION*, ACTION*);
+	int addMenu(char[16], char[16], ACTION*, ACTION*, ACTION*, ACTION*, int&);
+	int addMenu(char[16], char[16], ACTION*, ACTION*, ACTION*, ACTION*, float&);
+	int addMenu(char[16], ACTION*, ACTION*, ACTION*, ACTION*, float&);
+	int addMenu(char[16], char[16], ACTION*, ACTION*, ACTION*, ACTION*, float&, float&, float&);
 
 	bool GoToMenu(unsigned int);
 	bool PeseBouton(int);

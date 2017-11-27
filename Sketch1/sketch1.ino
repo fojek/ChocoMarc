@@ -4,6 +4,8 @@
  Author:	mfortier
 */
 
+#include "Recette.h"
+#include "Action.h"
 #include <EEPROM.h>
 #include <OneWire.h>
 #include <PID_v1.h>
@@ -32,7 +34,7 @@ int indexRecette_old = indexRecette;
 float temperature, cible, chauffage;
 
 // Instance du menu
-baseMenu menu;
+BaseMenu menu;
 
 // Instance de la tempéreuse
 Tempereuse * tempereuse = new Tempereuse(HEATER, TEMP);
@@ -50,9 +52,9 @@ void setup()
 	p_log("setup()_debut_2", tempereuse->etape(), 0);
 
 	Recette dummy;
-	dummy.set(45, 26, 29);
+	dummy.set(45, 27, 31);	// Chocolat noir
 	dummy.saveRecette(0);
-	dummy.set(22, 23, 24);
+	dummy.set(45, 26, 29);	// Chocolat au lait
 	dummy.saveRecette(1);
 	dummy.set(32, 33, 34);
 	dummy.saveRecette(2);
@@ -66,32 +68,38 @@ void setup()
 	p_log("setup()_fin_", tempereuse->etape(), 0);
 
 	// Définition des menus
-	menu.addMenu("ChocoMarc v1.0", "< hit any key >",
-				Action(TYPE::GoTo, 1),
-				Action(TYPE::GoTo, 1),
-				Action(TYPE::GoTo, 1),
-				Action(TYPE::GoTo, 1));
+	menu.addMenu("ChocoMarc v1.0", " < Continuer > ",
+				ACTION::createGoto(1),
+				ACTION::createGoto(1),
+				ACTION::createGoto(1),
+				ACTION::createGoto(1));
 
-	menu.addMenu("Choix de la recette :", "",
-				Action(TYPE::INCREMENTE, 1), 
-				Action(TYPE::DECREMENTE, 2), 
-				Action(TYPE::CONFIRME, 0), 
-				Action(TYPE::CONFIRME, 0),
+	menu.addMenu("Temp. actuelle",
+				ACTION::createGoto(2),
+				ACTION::createGoto(2),
+				ACTION::createGoto(2),
+				ACTION::createGoto(2),
+				temperature);
+
+	menu.addMenu("Choix recette", "",
+				ACTION::createInc(),
+				ACTION::createDec(),
+				ACTION::createConfirme(3),
+				ACTION::createConfirme(3),
 				indexRecette);
 
 	menu.addMenu("Temp|Cible|Chauf", "",
-		Action(TYPE::GoTo, 0), 
-		Action(TYPE::GoTo, 0), 
-		Action(TYPE::GoTo, 0),
-		Action(TYPE::GoTo, 0),
-		temperature,
-		cible,
-		chauffage);
+				ACTION::createGoto(0),
+				ACTION::createGoto(0),
+				ACTION::createGoto(0),
+				ACTION::createGoto(0),
+				temperature,
+				cible,
+				chauffage);
 
 	menu.AfficheMenu();
 	p_log("setup()_fin_", tempereuse->etape(), 0);
 
-	//pinMode(HEATER, OUTPUT);
 }
 
 // the loop function runs over and over again until power down or reset
@@ -122,7 +130,7 @@ void loop() {
 	{
 		indexRecette = indexRecette_old;
 		// Charge la recette et démarre le PID
-		menu.GoToMenu(2);
+		menu.GoToMenu(3);
 		tempereuse->start(indexRecette);
 		p_log("loop()_recette_changée", bouton, 0);
 	}

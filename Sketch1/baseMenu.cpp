@@ -1,14 +1,18 @@
 #include "baseMenu.h"
+#include "MenuIntEdit.h"
+#include "MenuFloatEdit.h"
+#include "Menu3Float.h"
+#include "MenuFloat.h"
 
 using namespace std;
 
-baseMenu::baseMenu()
+BaseMenu::BaseMenu()
 {
 	// Initialisation du LCD (16 char, 2 colonnes)
 	lcd.begin(16, 2);
 }
 
-baseMenu::~baseMenu()
+BaseMenu::~BaseMenu()
 {
 	for (auto i : menu)
 	{
@@ -16,36 +20,42 @@ baseMenu::~baseMenu()
 	}
 }
 
-
-int baseMenu::addMenu(char l1[16], char l2[16], ACTION a1, ACTION a2, ACTION a3, ACTION a4)
+int BaseMenu::addMenu(char l1[16], char l2[16], ACTION * a1, ACTION * a2, ACTION * a3, ACTION * a4)
 {
-	MENU * m = new MENU(l1, l2, a1, a2, a3, a4);
+	Menu * m = new Menu(l1, l2, a1, a2, a3, a4);
 	menu.push_back(m);
 	return menu.size() - 1;
 }
 
-int baseMenu::addMenu(char l1[16], char l2[16], ACTION a1, ACTION a2, ACTION a3, ACTION a4, int &val)
+int BaseMenu::addMenu(char l1[16], char l2[16], ACTION * a1, ACTION * a2, ACTION * a3, ACTION * a4, int &val)
 {
-	MENU_INT * m = new MENU_INT(l1, l2, a1, a2, a3, a4, val);
+	MENU_INT_EDIT * m = new MENU_INT_EDIT(l1, l2, a1, a2, a3, a4, val);
 	menu.push_back(m);
 	return menu.size() - 1;
 }
 
-int baseMenu::addMenu(char l1[16], char l2[16], ACTION a1, ACTION a2, ACTION a3, ACTION a4, float &val)
+int BaseMenu::addMenu(char l1[16], char l2[16], ACTION * a1, ACTION * a2, ACTION * a3, ACTION * a4, float &val)
 {
-	MENU_FLOAT * m = new MENU_FLOAT(l1, l2, a1, a2, a3, a4, val);
+	MENU_FLOAT_EDIT * m = new MENU_FLOAT_EDIT(l1, l2, a1, a2, a3, a4, val);
 	menu.push_back(m);
 	return menu.size() - 1;
 }
 
-int baseMenu::addMenu(char l1[16], char l2[16], ACTION a1, ACTION a2, ACTION a3, ACTION a4, float &v1, float &v2, float &v3)
+int BaseMenu::addMenu(char l1[16], ACTION * a1, ACTION * a2, ACTION * a3, ACTION * a4, float &val)
+{
+	MENU_FLOAT * m = new MENU_FLOAT(l1, a1, a2, a3, a4, val);
+	menu.push_back(m);
+	return menu.size() - 1;
+}
+
+int BaseMenu::addMenu(char l1[16], char l2[16], ACTION * a1, ACTION * a2, ACTION * a3, ACTION * a4, float &v1, float &v2, float &v3)
 {
 	MENU_3FLOAT * m = new MENU_3FLOAT(l1, l2, a1, a2, a3, a4, v1, v2, v3);
 	menu.push_back(m);
 	return menu.size() - 1;
 }
 
-bool baseMenu::GoToMenu(unsigned int dest)
+bool BaseMenu::GoToMenu(unsigned int dest)
 {
 	if (dest < menu.size())
 	{
@@ -57,7 +67,7 @@ bool baseMenu::GoToMenu(unsigned int dest)
 	return false;
 }
 
-bool baseMenu::PeseBouton(int bouton)
+bool BaseMenu::PeseBouton(int bouton)
 {
 	switch (menu.at(menuEnCours)->typeAction(bouton))
 	{
@@ -78,7 +88,7 @@ bool baseMenu::PeseBouton(int bouton)
 	return false;
 }
 
-char * baseMenu::AfficheMenu()
+char * BaseMenu::AfficheMenu()
 {
 	
 	lcd.clear();
@@ -95,8 +105,10 @@ char * baseMenu::AfficheMenu()
 	*/
 }
 
-void baseMenu::Update()
+void BaseMenu::Update()
 {
-	if (menu.at(menuEnCours)->aChange())
-			AfficheMenu();
+	
+	if (menu.at(menuEnCours)->aChange()) {
+		AfficheMenu();
+	}
 }
