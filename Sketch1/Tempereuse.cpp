@@ -10,7 +10,7 @@ void Tempereuse::init()
 {
 	p_log("Tempereuse::init()_debut", etapeEnCours, 0);
 	// Instance du PID (&input, &output, &setpoint, P, I, D, mode)
-	pid = new PID(&temperature, &sortie, &setpoint, 40, 0.5, 1, DIRECT);
+	pid = new PID(&temperature, &sortie, &setpoint, 20, 0.5, 1, DIRECT); // 40, 0.5, 1, DIRECT);
 	pid->SetOutputLimits(0, windowSize);
 	
 	// Pin de sortie
@@ -72,7 +72,7 @@ bool Tempereuse::update(float &t_aff)
 	temperature = getTemp();
 	if (estEnMarche())
 	{
-		pid->Compute();
+		// pid->Compute();
 
 		switch (etapeEnCours)
 		{
@@ -94,6 +94,10 @@ bool Tempereuse::update(float &t_aff)
 
 		pid->Compute();
 		setpoint = recette->setpoint(etapeEnCours);
+
+		// On ne veut pas cuire le chocolat ...
+		if (sortie > 1000)
+			sortie = 1000;
 
 		unsigned long now = millis();
 

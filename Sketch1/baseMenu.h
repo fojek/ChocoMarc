@@ -13,7 +13,7 @@ class BaseMenu
 	const int HAUTEUR = 2;
 
 	// Vecteur d'addresses de la classe de base MENU
-	vector<Menu*> menu;
+	
 	int menuEnCours = 0;
 
 	// Instance de l'affichage (Syntaxe bizz à cause d'une erreur de compilation)
@@ -21,6 +21,7 @@ class BaseMenu
 	LiquidCrystal lcd = LiquidCrystal(8, 9, 4, 5, 6, 7);
 
 public:
+	vector<Menu*> menu;
 	BaseMenu();
 	~BaseMenu();
 

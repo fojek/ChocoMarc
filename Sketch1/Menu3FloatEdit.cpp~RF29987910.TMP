@@ -1,20 +1,17 @@
 #include "Menu3FloatEdit.h"
 #include "util.h"
-#include <string>
-#include <stdio.h>
-#include <stdlib.h>
 
 /******************************************
 * Classe dérivée MENU3FloatEdit
 * Une ligne de texte et 3 float editables
 ******************************************/
 
-Menu3FloatEdit::Menu3FloatEdit(char ligne1[16], Action * a1, Action * a2, Action * a3, Action * a4, int &pnRecette) : numRecette(pnRecette)
+Menu3FloatEdit::Menu3FloatEdit(char ligne1[16], Action * a1, Action * a2, Action * a3, Action * a4, int pnRecette) : numRecette(pnRecette)
 {
-	sprintf(l1, "Recette %i", numRecette);
+	strcpy(l1, ligne1);
 
-	action[0] = a1;
-	action[1] = a2;
+	action[0] = Action::createInc();
+	action[1] = Action::createDec();
 	action[2] = a3;
 	action[3] = a4;
 
@@ -24,11 +21,15 @@ Menu3FloatEdit::Menu3FloatEdit(char ligne1[16], Action * a1, Action * a2, Action
 
 	updateL2();
 
+	p_log("######", action[0]->type(), action[1]->type());
+	p_log("######", action[2]->type(), action[3]->type());
+
 }
 
 void Menu3FloatEdit::incremente()
 {
-	recette->set(index, recette->get(index) + 1);
+	recette->set(index, recette->get(index) - 1);
+	p_log("######### was here", 0, 0);
 	updateL2();
 }
 
@@ -56,15 +57,9 @@ void Menu3FloatEdit::updateL2(void)
 {
 	if (numRecette != numRecette_old) {
 		recette->loadRecette(numRecette);
-		numRecette_old = numRecette;
-
-		sprintf(l1, "Recette %i", numRecette);
-
+		numRecette != numRecette_old;
 		index = 0;
 	}
 
-	sprintf(l1, "Recette %i", numRecette);
-
-	p_log_2("Recette ", numRecette, 0);
-	formatValInt(l2, recette->get(0), recette->get(1), recette->get(2));
+	formatVal(l2, recette->get(0), recette->get(1), recette->get(2));
 }

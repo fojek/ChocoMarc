@@ -25,11 +25,11 @@ class Menu3FloatEdit : public Menu
 
 public:
 	// Méthodes
-	Menu3FloatEdit(char[16], Action*, Action*, Action*, Action*, int numRecette);
+	Menu3FloatEdit(char[16], Action*, Action*, Action*, Action*, int &numRecette);
 
 	// Fonctions inutilisées
-	void incremente();
-	void decremente();
+	void incremente(void);
+	void decremente(void);
 	void confirme(void);
 	void ferme(void);
 	char * retourneL2(void) { updateL2();  return l2; }

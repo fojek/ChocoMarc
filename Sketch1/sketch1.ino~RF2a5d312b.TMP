@@ -61,7 +61,7 @@ void setup()
 
 	dummy.set(45, 27, 31);	// Chocolat noir
 	dummy.saveRecette(0);
-	//dummy.loadRecette(0);
+	dummy.loadRecette(0);
 
 	Serial.println((int)dummy.setpoint(0));
 
@@ -129,7 +129,6 @@ void loop() {
 	unsigned char commande;
 	bouton = read_LCD_buttons();
 
-	// Pour éviter que les boutons fassent plusieurs actions rapidement
 	if (bouton != bouton_old)
 	{
 		if (bouton != btnNONE) {
@@ -137,7 +136,6 @@ void loop() {
 			menu.AfficheMenu();
 			p_log("loop()_bouton", bouton, 0);
 		}
-
 		bouton_old = bouton;
 
 	}

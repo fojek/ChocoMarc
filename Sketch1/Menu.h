@@ -12,8 +12,8 @@ class Menu
 {
 protected:
 	// Texte
-	char l1[16];
-	char l2[16];
+	char l1[17];
+	char l2[17];
 
 	// Actions
 	Action * action[4];
@@ -26,7 +26,7 @@ public:
 	virtual char * retourneL2(void) { return l2; }
 	Type typeAction(int a) { return action[a]->type(); }
 	int destAction(int a) { return action[a]->dest(); }
-
+	void logAll(void);
 	// Fonctions virtuelles pour les classes dérivées
 	// Commandes possibles sur les menus
 	virtual void incremente() {};

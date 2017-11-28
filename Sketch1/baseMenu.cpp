@@ -4,6 +4,7 @@
 #include "Menu3FloatEdit.h"
 #include "Menu3Float.h"
 #include "MenuFloat.h"
+#include "util.h"
 
 using namespace std;
 
@@ -100,6 +101,9 @@ char * BaseMenu::AfficheMenu()
 {
 
 	lcd.clear();
+	// Update
+	menu.at(menuEnCours)->retourneL2();
+	// Print to LCD
 	lcd.print(menu.at(menuEnCours)->retourneL1());
 	lcd.setCursor(0, 1);
 	lcd.print(menu.at(menuEnCours)->retourneL2());

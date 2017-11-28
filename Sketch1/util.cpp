@@ -66,7 +66,7 @@ bool deviationVal(float act, float old)
 	// Deviation de 1% permise avant un refresh
 	const float DEVIATION = 0.0001;
 
-	if(abs(act-old)/act > DEVIATION) 
+	if (abs(act - old) / act > DEVIATION)
 		return true;
 
 	return false;
@@ -90,9 +90,9 @@ void formatVal(char * l2, float val)
 	strcpy(l2, temp1);
 }
 
-void formatVal(char * l2, int val1, int val2, int val3)
+void formatValInt(char * l2, int val1, int val2, int val3)
 {
-	char temp1[17];
+	char temp1[15];
 	char temp2[5];
 	char temp3[5];
 
@@ -106,31 +106,33 @@ void formatVal(char * l2, int val1, int val2, int val3)
 }
 
 void formatVal(char * l2, float val1, float val2, float val3) {
-	char temp1[17];
+
+	char temp1[15];
 	char temp2[5];
 	char temp3[5];
 
 	// Convertit les float en char
-	ftoa(temp1, val1, 1);
-	ftoa(temp2, val2, 1);
-	ftoa(temp3, val3, 1);
+	ftoa(temp1, val1, 0);
+	ftoa(temp2, val2, 0);
+	ftoa(temp3, val3, 0);
 
 	// Copie dans la ligne 2
 	strcpy(l2, format(temp1, temp2, temp3));
+
 }
 
 char * format(char * v1, char * v2, char * v3) {
 	// Forme la chaîne de caractère : "00.0| 00.0 | 00.0"
 	strcat(v1, "| ");
 	strcat(v1, v2);
-	strcat(v1, "| ");
+	strcat(v1, "|");
 	strcat(v1, v3);
 
 	// Copie dans la ligne 2
 	return v1;
 }
 
-void p_log(char a[16], int b, int c)
+void p_log_2(char a[16], int b, int c)
 {
 	Serial.print("Fonction ");
 	Serial.print(a);
@@ -138,6 +140,10 @@ void p_log(char a[16], int b, int c)
 	Serial.print(b);
 	Serial.print(", : ");
 	Serial.println(c);
+}
+
+void p_log(char a[16], int b, int c)
+{
 }
 
 // De Arduino Playground
