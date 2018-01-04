@@ -34,6 +34,8 @@ int indexRecette = 0;
 int indexRecette_old = indexRecette;
 int recetteEnEdition = 0;
 float temperature, cible, chauffage;
+bool goLoadRecipe = false;
+bool dummyBool = false;
 
 // Instance du menu
 BaseMenu menu;
@@ -86,14 +88,16 @@ void setup()
 		Action::createDec(),
 		Action::createConfirme(),
 		Action::createGoto(3),
-		indexRecette);
+		indexRecette,
+		goLoadRecipe);
 
 	menu.addMenu("Edition recette #", "",
 		Action::createInc(),
 		Action::createDec(),
 		Action::createConfirme(),
 		Action::createGoto(4),
-		recetteEnEdition);
+		recetteEnEdition,
+		dummyBool);
 
 	menu.addMenu("Recette X",
 		Action::createInc(),
@@ -143,22 +147,16 @@ void loop() {
 	}
 
 	menu.Update();
-	tempereuse->update(temperature);
-	if (!tempereuse->estEnMarche())
-	{
-		p_log("loop()_recette_démarrée", bouton, 0);
-		tempereuse->start(indexRecette);
-	}
 
-	// Une recette différente a été choisie
-	if (indexRecette != indexRecette_old)
-	{
-		indexRecette_old = indexRecette;
-		// Charge la recette et démarre le PID
+	// Charge la recette et démarre le PID
+	if (goLoadRecipe) {
 		menu.GoToMenu(5);
 		tempereuse->start(indexRecette);
-		p_log("loop()_recette_changée", bouton, 0);
+		p_log("loop()_recette_démarrée", bouton, 0);
+		goLoadRecipe = false;
 	}
+
+	tempereuse->update(temperature);
 
 	p_log("loop()_fin_cycle", tempereuse->etape(), 0);
 

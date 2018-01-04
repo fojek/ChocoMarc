@@ -26,7 +26,7 @@ public:
 	~BaseMenu();
 
 	int addMenu(char[16], char[16], Action*, Action*, Action*, Action*);
-	int addMenu(char[16], char[16], Action*, Action*, Action*, Action*, int&);
+	int addMenu(char[16], char[16], Action*, Action*, Action*, Action*, int&, bool&);
 	int addMenu(char[16], char[16], Action*, Action*, Action*, Action*, float&);
 	int addMenu(char[16], Action*, Action*, Action*, Action*, float&);
 	int addMenu(char[16], char[16], Action*, Action*, Action*, Action*, float&, float&, float&);

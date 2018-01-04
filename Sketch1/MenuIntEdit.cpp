@@ -9,7 +9,7 @@
 * Une ligne de texte et un int éditable
 ******************************************/
 
-MenuIntEdit::MenuIntEdit(char ligne1[16], char ligne2[16], Action * a1, Action * a2, Action * a3, Action * a4, int & v) : val(v)
+MenuIntEdit::MenuIntEdit(char ligne1[16], char ligne2[16], Action * a1, Action * a2, Action * a3, Action * a4, int & v, bool & t) : val(v), trigger(t)
 {
 	strcpy(l1, ligne1);
 	strcpy(l2, ligne2);

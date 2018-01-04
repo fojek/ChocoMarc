@@ -29,9 +29,9 @@ int BaseMenu::addMenu(char l1[16], char l2[16], Action * a1, Action * a2, Action
 	return menu.size() - 1;
 }
 
-int BaseMenu::addMenu(char l1[16], char l2[16], Action * a1, Action * a2, Action * a3, Action * a4, int &val)
+int BaseMenu::addMenu(char l1[16], char l2[16], Action * a1, Action * a2, Action * a3, Action * a4, int &val, bool &trigger)
 {
-	MenuIntEdit * m = new MenuIntEdit(l1, l2, a1, a2, a3, a4, val);
+	MenuIntEdit * m = new MenuIntEdit(l1, l2, a1, a2, a3, a4, val, trigger);
 	menu.push_back(m);
 	return menu.size() - 1;
 }

@@ -10,7 +10,7 @@ void Tempereuse::init()
 {
 	p_log("Tempereuse::init()_debut", etapeEnCours, 0);
 	// Instance du PID (&input, &output, &setpoint, P, I, D, mode)
-	pid = new PID(&temperature, &sortie, &setpoint, 20, 0.5, 1, DIRECT); // 40, 0.5, 1, DIRECT);
+	pid = new PID(&temperature, &sortie, &setpoint, 30, 0.15, 1, DIRECT); // 40, 0.5, 1, DIRECT);
 	pid->SetOutputLimits(0, windowSize);
 	
 	// Pin de sortie
